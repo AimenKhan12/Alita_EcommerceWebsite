@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Analytics Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  /* ===== GLOBAL ===== */
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+  body{background:#f5f7fa;color:#222;overflow-x:hidden;}
+  h1{font-size:36px;text-align:center;color:#20c997;margin:40px 0 20px 0;font-weight:700;position:relative;opacity:0; transform: translateY(-20px); animation:fadeSlide 0.6s forwards;}
+
+  @keyframes fadeSlide {
+    to {opacity:1; transform:translateY(0);}
+  }
+
+  /* ===== CLOSE BUTTON ===== */
+  .close-dashboard{
+    position:fixed;
+    top:20px;
+    right:30px;
+    font-size:30px;
+    color:#5ac3db;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    z-index:200;
+    opacity:0; transform:translateY(-20px);
+    animation:fadeSlide 0.6s forwards 0.2s;
+  }
+  .close-dashboard:hover{
+    transform:scale(1.2);
+    color:#289eb1;
+  }
+
+  /* ===== DASHBOARD CONTAINER ===== */
+  .dashboard{
+    width:90%;
+    max-width:1200px;
+    margin:0 auto 60px auto;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:30px;
+    opacity:0; transform:translateY(20px);
+    animation:fadeSlide 0.6s forwards 0.4s;
+  }
+
+  /* ===== CHART CARD ===== */
+  .chart-card{
+    background:#fff;
+    border-radius:20px;
+    border-color: #20c997;
+    padding:25px 20px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position:relative;
+    opacity:0; transform:translateY(20px);
+    animation:fadeSlide 0.6s forwards;
+  }
+  .chart-card:nth-child(1){animation-delay:0.5s;}
+  .chart-card:nth-child(2){animation-delay:0.6s;}
+  .chart-card:nth-child(3){animation-delay:0.7s;}
+  .chart-card:nth-child(4){animation-delay:0.8s;}
+  .chart-card:nth-child(5){animation-delay:0.9s;}
+
+  .chart-card:hover{
+    transform: translateY(-5px) scale(1.01);
+    box-shadow:0 15px 35px rgba(0,0,0,0.12);
+  }
+
+  .chart-title{
+    font-size:22px;
+    color:#20c997;
+    margin-bottom:15px;
+    font-weight:600;
+    transition:color 0.3s ease;
+  }
+
+  .chart-card:hover .chart-title{
+    color:#008080;
+  }
+
+  canvas{
+    background:#fefefe;
+    border-radius:15px;
+    padding:10px;
+  }
+
+  /* ===== TABLE ===== */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    opacity:0; transform:translateY(20px);
+    animation:fadeSlide 0.6s forwards 0.5s;
+  }
+  th, td{
+    padding:12px 15px;
+    text-align:center;
+    font-size:15px;
+  }
+  th{
+    background:#20c997;
+    color:#fff;
+    font-weight:600;
+  }
+  tr:nth-child(even){background:#f1f5f9;}
+  tr:hover{background:#e0f7f1; cursor:pointer;}
+
+  /* ===== DASHBOARD GRID FOR CHARTS ===== */
+  .charts-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+  }
+
+  /* ===== LEGEND COLORS ===== */
+  .chart-legend{
+    display:flex;
+    justify-content:space-around;
+    margin-top:15px;
+    font-size:14px;
+    font-weight:500;
+  }
+  .chart-legend span{
+    display:flex;
+    align-items:center;
+    gap:5px;
+  }
+  .chart-legend .color-box{
+    width:15px;
+    height:15px;
+    border-radius:4px;
+  }
+</style>
+</head>
+<body>
+
+<!-- CLOSE DASHBOARD -->
+<span class="close-dashboard" onclick="closeDashboard()">&times;</span>
+
+<h1>Product Analytics Dashboard</h1>
+
+<div class="dashboard" id="dashboard">
+
+  <!-- TABLE OF PRODUCT METRICS -->
+  <div class="chart-card">
+    <div class="chart-title">Product Overview</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Units Sold</th>
+          <th>Revenue ($)</th>
+          <th>Stock</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Rings</td><td>120</td><td>3500</td><td>40</td><td>5</td></tr>
+        <tr><td>Necklaces</td><td>90</td><td>4200</td><td>30</td><td>4</td></tr>
+        <tr><td>Bracelets</td><td>80</td><td>3100</td><td>50</td><td>4</td></tr>
+        <tr><td>Earrings</td><td>60</td><td>2000</td><td>20</td><td>3.5</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CHARTS GRID -->
+  <div class="charts-grid">
+    <!-- BAR CHART -->
+    <div class="chart-card">
+      <div class="chart-title">Monthly Sales</div>
+      <canvas id="salesChart"></canvas>
+    </div>
+
+    <!-- LINE CHART -->
+    <div class="chart-card">
+      <div class="chart-title">Revenue Trend</div>
+      <canvas id="revenueChart"></canvas>
+    </div>
+
+    <!-- PIE CHART -->
+    <div class="chart-card">
+      <div class="chart-title">Stock Distribution</div>
+      <canvas id="stockChart"></canvas>
+    </div>
+
+    <!-- RADAR CHART -->
+    <div class="chart-card">
+      <div class="chart-title">Customer Ratings</div>
+      <canvas id="ratingChart"></canvas>
+    </div>
+    
+    <!-- DONUT CHART -->
+    <div class="chart-card">
+      <div class="chart-title">Revenue Share (%)</div>
+      <canvas id="donutChart"></canvas>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const products = ["Rings","Necklaces","Bracelets","Earrings"];
+  const colors = ["#20c997","#ff6b6b","#ffa502","#1e90ff"];
+
+  // BAR CHART - Units Sold
+  new Chart(document.getElementById('salesChart'), {
+    type:'bar',
+    data:{
+      labels:products,
+      datasets:[{
+        label:'Units Sold',
+        data:[120,90,80,60],
+        backgroundColor:colors,
+        borderRadius:10
+      }]
+    },
+    options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}
+  });
+
+  // LINE CHART - Revenue Trend
+  new Chart(document.getElementById('revenueChart'), {
+    type:'line',
+    data:{
+      labels:['Jan','Feb','Mar','Apr','May','Jun'],
+      datasets:products.map((p,i)=>({
+        label:p,
+        data:Array.from({length:6},()=>Math.floor(Math.random()*300+50)),
+        borderColor:colors[i],
+        backgroundColor:colors[i]+'33',
+        tension:0.3,
+        fill:true,
+        pointRadius:5,
+        pointHoverRadius:8
+      }))
+    },
+    options:{responsive:true,plugins:{tooltip:{mode:'nearest',intersect:false}},scales:{y:{beginAtZero:true}}}
+  });
+
+  // PIE CHART - Stock Distribution
+  new Chart(document.getElementById('stockChart'),{
+    type:'pie',
+    data:{labels:products,datasets:[{data:[40,30,50,20],backgroundColor:colors,hoverOffset:12}]},
+    options:{responsive:true,plugins:{tooltip:{mode:'point'}}}
+  });
+
+  // RADAR CHART - Ratings
+  new Chart(document.getElementById('ratingChart'),{
+    type:'radar',
+    data:{labels:products,datasets:[{label:'Customer Ratings',data:[5,4,4,3.5],backgroundColor:'#20c99755',borderColor:'#20c997',pointBackgroundColor:colors,pointBorderColor:'#222',pointHoverBackgroundColor:'#fff',pointHoverBorderColor:colors}]},
+    options:{responsive:true,scales:{r:{beginAtZero:true,max:5,ticks:{stepSize:1}}},plugins:{legend:{position:'top'}}}
+  });
+
+  // DONUT CHART - Revenue Share
+  new Chart(document.getElementById('donutChart'),{
+    type:'doughnut',
+    data:{
+      labels:products,
+      datasets:[{
+        label:'Revenue Share',
+        data:[3500,4200,3100,2000],
+        backgroundColor:colors,
+        hoverOffset:15
+      }]
+    },
+    options:{responsive:true,plugins:{tooltip:{mode:'point'}}}
+  });
+
+  function closeDashboard() {
+      // Go back to the previous page
+      window.history.back();
+  }
+</script>
+
+</body>
+</html>

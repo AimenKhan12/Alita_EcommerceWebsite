@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoldenAura Jewelry</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+/* ============== GLOBAL ============== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#fff;scroll-behavior:smooth;}
+a{text-decoration:none;color:inherit;}
+
+/* ============== HEADER ============== */
+header{
+  position:sticky;top:0;background:#fff;display:flex;justify-content:space-between;align-items:center;padding:17px 55px;box-shadow:0 4px 12px rgba(0,0,0,0.05);z-index:10;
+}
+/* ===== LOGO CONTAINER ===== */
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+  position:relative;
+  width:fit-content;
+  overflow:hidden;
+}
+
+/* ===== LOGO IMAGE ===== */
+.logo img{
+  width:48px;
+  height:auto;
+  transition:transform 0.4s ease, filter 0.4s ease;
+}
+
+/* ===== LOGO TEXT ===== */
+.logo span{
+  font-size:26px;
+  font-weight:700;
+  letter-spacing:2px;
+  color:#20c997;
+  position:relative;
+  transition:transform 0.4s ease, text-shadow 0.4s ease;
+}
+
+/* ===== HOVER EFFECT ===== */
+.logo:hover img{
+  transform:scale(1.1) rotate(-2deg);
+  filter:drop-shadow(0 6px 10px rgba(32,201,151,0.4));
+}
+
+.logo:hover span{
+  transform:translateY(-2px);
+  text-shadow:0 6px 15px rgba(32,201,151,0.4);
+}
+
+/* ===== SHINE EFFECT (ALWAYS RUNNING) ===== */
+.logo::after{
+  content:'';
+  position:absolute;
+  top:-40%;
+  left:-60%;
+  width:60%;
+  height:180%;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.6),
+    transparent
+  );
+  transform:rotate(20deg);
+  animation:shine 3s infinite;
+}
+
+/* ===== SHINE ANIMATION ===== */
+@keyframes shine{
+  0%{left:-60%;}
+  100%{left:120%;}
+}
+header nav{display:flex;gap:20px;align-items:center;}
+header nav a{font-weight:500;color:#20c997;display:flex;align-items:center;gap:5px;transition:all 0.3s;}
+header nav a:hover{color:#20c997;transform:scale(1.1);}
+header .search{position:relative;}
+header .search input{padding:8px 75px 7px 10px;border-radius:20px;border:1px solid #ccc;outline:none;}
+header .search button{position:absolute;right:5px;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;font-size:18px;color:#20c997;}
+header .search button:hover{color:#20c997;transform: translateY(-50%) scale(1.1);}
+header .icons{display:flex;gap:20px;align-items:center;color:#20c997;}
+header .icons i{font-size:20px;cursor:pointer;transition:all 0.3s;}
+header .icons i:hover{transform:scale(1.2);color:#20c997;}
+/* FAVORITES PANEL */
+#favoritesPanel {
+  position: fixed;
+  top: 0;
+  right: -400px; /* hidden by default */
+  width: 350px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
+  z-index: 200;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+#favoritesPanel.open {
+  right: 0;
+}
+
+.favorites-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.favorites-header h3 {
+  font-size: 22px;
+  color: #20c997;
+}
+
+.close-fav {
+  font-size: 26px;
+  cursor: pointer;
+  color: #20c997;
+}
+
+.favorites-list .fav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.fav-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.fav-item .fav-info {
+  flex: 1;
+}
+
+.fav-item .fav-info .name {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.fav-item .fav-info .price {
+  color: #20c997;
+  font-weight: 600;
+}
+
+.fav-item .remove-fav {
+  cursor: pointer;
+  color: #20c997;
+  font-size: 22px;
+  transition: transform 0.2s;
+}
+
+.fav-item .remove-fav:hover {
+  transform: scale(1.2);
+}
+#favoritesPanel.active{
+  right:0;
+}
+/* ===== ABOUT PAGE ===== */
+.about-page{
+  background:#fff;
+  padding:80px 8%;
+  font-family: 'Poppins', sans-serif;
+  color:#555;
+}
+
+/* ===== HERO ===== */
+.about-hero{
+  display:flex;
+  align-items:center;
+  gap:60px;
+  margin-bottom:100px;
+}
+
+.about-text h1{
+  font-size:48px;
+  font-weight:700;
+  color:#222;
+  line-height:1.2;
+}
+
+.about-text h1 span{
+  color:#20c997;
+  position:relative;
+}
+
+.about-text h1 span::after{
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:0;
+  height:4px;
+  background:#20c997;
+  transition:width 0.4s ease;
+}
+
+.about-text h1 span:hover::after{
+  width:100%;
+}
+
+.about-text p{
+  margin-top:20px;
+  font-size:17px;
+  line-height:1.8;
+  max-width:600px;
+  transition:all 0.5s ease;
+}
+
+.btn-primary{
+  display:inline-block;
+  margin-top:25px;
+  background:#20c997;
+  color:#fff;
+  padding:12px 30px;
+  border-radius:50px;
+  font-weight:500;
+  text-decoration:none;
+  transition:all 0.4s ease;
+}
+
+.btn-primary:hover{
+  background:#1aa67f;
+  transform:scale(1.05);
+  box-shadow:0 10px 25px rgba(32,201,151,0.3);
+}
+.luxury-cluster{
+  position:relative;
+  width:420px;
+  height:420px;
+}
+
+/* ===== GLOW RING ===== */
+.ring{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  border:2px solid rgba(32,201,151,0.25);
+  animation:rotate 18s linear infinite;
+}
+
+/* ===== ALL CIRCLES ===== */
+.circle{
+  position:absolute;
+  border-radius:50%;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 18px 45px rgba(0,0,0,0.15);
+  transition:all 0.8s ease;
+}
+
+.circle img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform 0.9s ease;
+}
+
+/* ===== BIG CENTER ===== */
+.circle.big{
+  width:300px;
+  height:300px;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  z-index:2;
+}
+
+.luxury-cluster:hover .circle.big img{
+  transform:scale(1.12);
+}
+
+/* ===== SMALL CIRCLES ===== */
+.circle.small{
+  width:90px;
+  height:90px;
+  z-index:3;
+  animation:floating 6s ease-in-out infinite;
+}
+
+.s1{top:-5px; left:50%; transform:translateX(-50%);}
+.s2{right:-10px; top:50%; transform:translateY(-50%);}
+.s3{bottom:-10px; left:45%;}
+.s4{left:-10px; top:50%; transform:translateY(-50%);}
+
+.s2{animation-delay:1.5s;}
+.s3{animation-delay:3s;}
+.s4{animation-delay:4.5s;}
+
+/* ===== HOVER MAGIC ===== */
+.circle.small:hover{
+  transform:scale(1.2);
+  box-shadow:0 22px 55px rgba(32,201,151,0.4);
+}
+
+.luxury-cluster:hover .circle.small{
+  filter:brightness(1.05);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes floating{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-12px);}
+  100%{transform:translateY(0);}
+}
+
+@keyframes rotate{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+
+.about-page{
+  background:#fff;
+  padding:80px 8%;
+  font-family:'Poppins',sans-serif;
+  color:#555;
+}
+
+/* ===== HERO ===== */
+.about-hero{
+  display:flex;
+  align-items:center;
+  gap:60px;
+  margin-bottom:100px;
+}
+
+.about-text h1{
+  font-size:48px;
+  font-weight:700;
+  color:#222;
+  line-height:1.2;
+}
+
+.about-text h1 span{
+  color:#20c997;
+  position:relative;
+}
+
+.about-text h1 span::after{
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:0;
+  height:4px;
+  background:#20c997;
+  transition:width 0.4s ease;
+}
+
+.about-text h1 span:hover::after{
+  width:100%;
+}
+
+.about-text p{
+  margin-top:20px;
+  font-size:17px;
+  line-height:1.8;
+  max-width:600px;
+  transition:all 0.5s ease;
+}
+
+.about-img img{
+  width:420px;
+  border-radius:25px;
+  transition:all 0.8s ease, transform 0.8s ease;
+  box-shadow:0 15px 40px rgba(0,0,0,0.12);
+}
+
+.about-img img:hover{
+  transform:scale(1.08) translateY(-8px);
+  box-shadow:0 25px 60px rgba(32,201,151,0.35);
+}
+
+/* ===== STORY ===== */
+.about-story{
+  display:flex;
+  align-items:center;
+  gap:60px;
+  margin-bottom:100px;
+}
+
+.story-img img{
+  width:380px;
+  border-radius:22px;
+  transition:all 0.8s ease;
+}
+
+.story-img img:hover{
+  transform:translateY(-15px) scale(1.05) rotate(-1deg);
+  box-shadow:0 20px 60px rgba(32,201,151,0.25);
+}
+
+.story-text h2{
+  font-size:36px;
+  color:#20c997;
+  margin-bottom:15px;
+  position:relative;
+}
+
+.story-text h2::after{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:-5px;
+  width:60px;
+  height:4px;
+  background:#20c997;
+  border-radius:3px;
+  transition:width 0.5s ease;
+}
+
+.story-text h2:hover::after{
+  width:100px;
+}
+
+.story-text p{
+  font-size:16px;
+  color:#555;
+  line-height:1.8;
+}
+
+/* ===== CRAFT CARDS ===== */
+.about-craft h2{
+  font-size:36px;
+  color:#20c997;
+  margin-bottom:50px;
+  text-align:center;
+}
+
+.craft-cards{
+  display:flex;
+  gap:40px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.craft-card{
+  background:#fff;
+  border-radius:25px;
+  padding:20px;
+  text-align:center;
+  box-shadow:0 12px 30px rgba(0,0,0,0.08);
+  transition:all 0.6s ease;
+  cursor:pointer;
+  width:280px;
+  overflow:hidden;
+  position:relative;
+}
+
+.craft-card::after{
+  content:'';
+  position:absolute;
+  top:-50%;
+  left:-70%;
+  width:50%;
+  height:200%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.5),transparent);
+  transform:rotate(25deg);
+  animation:shine 5s infinite;
+}
+
+.craft-card img{
+  width:100%;
+  border-radius:18px;
+  transition:all 0.6s ease;
+}
+
+.craft-card:hover img{
+  transform:scale(1.08) rotate(1deg);
+}
+
+.craft-card h3{
+  color:#20c997;
+  font-size:22px;
+  margin:18px 0 10px;
+}
+
+.craft-card p{
+  font-size:15px;
+  line-height:1.6;
+  color:#555;
+}
+
+.craft-card:hover{
+  transform:translateY(-12px) scale(1.03);
+  box-shadow:0 25px 50px rgba(32,201,151,0.25);
+}
+
+/* ===== FEATURED PIECE ===== */
+.featured-piece{
+  margin-top:100px;
+  text-align:center;
+}
+
+.featured-piece h2{
+  font-size:36px;
+  color:#20c997;
+  margin-bottom:30px;
+}
+
+.featured-piece .featured-img img{
+  width:400px;
+  border-radius:25px;
+  transition:all 0.8s ease;
+  box-shadow:0 15px 40px rgba(0,0,0,0.12);
+}
+
+.featured-piece .featured-img img:hover{
+  transform:scale(1.08) translateY(-8px);
+  box-shadow:0 25px 60px rgba(32,201,151,0.35);
+}
+
+.featured-piece p{
+  margin-top:20px;
+  font-size:17px;
+  color:#555;
+}
+
+/* ===== REVEAL ANIMATION ===== */
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:all 0.9s ease;
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ===== SHINE ANIMATION ===== */
+@keyframes shine{
+  0%{left:-70%;}
+  100%{left:130%;}
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .about-hero,.about-story,.craft-cards{flex-direction:column;text-align:center;}
+  .about-img img,.story-img img,.craft-card img,.featured-img img{width:100%;max-width:400px;}
+}
+/* ===== VALUES ===== */ .about-values{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:35px; }
+ .value-card{ background:#fff; border-radius:25px; padding:20px; text-align:center; box-shadow:0 10px 25px rgba(0,0,0,0.08);
+   transition:all 0.5s ease; position:relative; overflow:hidden; } .value-card::after{ content:''; position:absolute;
+    top:-50%; left:-70%; width:50%; height:200%; 
+    background:linear-gradient( 120deg, transparent, rgba(255,255,255,0.6), transparent ); transform:rotate(25deg); 
+    animation:shine 4s infinite; } .value-card img{ width:100%; height:220px; object-fit:cover; border-radius:18px; margin-bottom:18px; }
+     .value-card h3{ color:#20c997; font-size:22px; margin-bottom:8px; } 
+     .value-card p{ color:#555; font-size:15px; } 
+     .value-card:hover{ transform:translateY(-12px) scale(1.03); box-shadow:0 20px 45px rgba(32,201,151,0.3); }
+      /* ===== REVEAL ANIMATION ===== */ .reveal{ opacity:0; transform:translateY(40px); transition:all 0.9s ease; }
+       .reveal.active{ opacity:1; transform:translateY(0); } /* ===== SHINE ===== */ @keyframes shine{ 0%{left:-70%;} 100%{left:130%;} }
+        /* ===== RESPONSIVE ===== */ @media(max-width:900px)
+{ .about-hero, 
+.about-story{ flex-direction:column; text-align:center; } 
+.about-img img, .story-img img{ width:100%; max-width:400px; } }
+/* ===== TIMELINE / OUR JOURNEY ===== */
+/* ===== TIMELINE TREE ===== */
+.timeline-tree{
+  padding:80px 8%;
+  background:#fff;
+}
+
+.timeline-tree h2{
+  text-align:center;
+  font-size:36px;
+  color:#20c997;
+  margin-bottom:60px;
+  position:relative;
+}
+
+.tree-container{
+  position:relative;
+  margin:0 auto;
+  max-width:700px;
+  padding-left:20px;
+  border-left:3px solid rgba(32,201,151,0.3);
+}
+
+.tree-node{
+  position:relative;
+  margin-bottom:60px;
+  display:flex;
+  align-items:flex-start;
+  transition:all 0.5s ease;
+}
+
+.tree-node::before{
+  content:'';
+  position:absolute;
+  left:-13px;
+  top:50px;
+  width:3px;
+  height:calc(100% - 50px);
+  background:rgba(32,201,151,0.3);
+  z-index:0;
+}
+
+.tree-node:last-child::before{
+  display:none;
+}
+
+.node-icon{
+  width:80px;
+  height:80px;
+  flex-shrink:0;
+  border-radius:50%;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,0.12);
+  margin-right:25px;
+  transition:all 0.5s ease;
+  position:relative;
+  background:#fff;
+}
+
+.node-icon img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:all 0.6s ease;
+}
+
+.node-content{
+  flex:1;
+  background:#fff;
+  padding:20px 25px;
+  border-radius:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.08);
+  transition:all 0.5s ease;
+}
+
+.node-content h3{
+  font-size:24px;
+  color:#20c997;
+  margin-bottom:10px;
+}
+
+.node-content p{
+  font-size:15px;
+  line-height:1.6;
+  color:#555;
+}
+
+/* ===== HOVER ANIMATION ===== */
+.tree-node:hover .node-icon{
+  transform:scale(1.1) rotate(5deg);
+  box-shadow:0 15px 40px rgba(32,201,151,0.35);
+}
+
+.tree-node:hover .node-icon img{
+  transform:scale(1.1);
+}
+
+.tree-node:hover .node-content{
+  transform:translateX(10px) scale(1.02);
+  box-shadow:0 25px 50px rgba(32,201,151,0.25);
+}
+
+/* ===== SHINE EFFECT ===== */
+.tree-node::after{
+  content:'';
+  position:absolute;
+  top:0;
+  left:-50%;
+  width:50%;
+  height:100%;
+  background:linear-gradient(120deg,transparent,rgba(32,201,151,0.15),transparent);
+  transform:rotate(25deg);
+  animation:shine 5s infinite;
+}
+
+@keyframes shine{
+  0%{left:-50%;}
+  100%{left:150%;}
+}
+
+/* ===== REVEAL ANIMATION ===== */
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:all 0.9s ease;
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:700px){
+  .tree-container{
+    padding-left:0;
+    border-left:none;
+  }
+  .tree-node{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+  .tree-node::before{
+    display:none;
+  }
+  .node-icon{
+    margin-bottom:15px;
+    margin-right:0;
+  }
+  .node-content{
+    padding:15px 20px;
+  }
+}
+/* ===== FOOTER ===== */
+.site-footer{
+  background:#fff;
+  padding-top:60px;
+  font-family:'Poppins',sans-serif;
+  color:#555;
+}
+
+/* Top Strip */
+.footer-strip{
+  display:flex;
+  justify-content:center;
+  gap:50px;
+  padding-bottom:35px;
+  border-bottom:1px solid #eee;
+  flex-wrap:wrap;
+}
+
+.strip-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:15px;
+  color:#20c997;
+  transition:all 0.4s ease;
+}
+
+.strip-item i{
+  font-size:18px;
+}
+
+.strip-item:hover{
+  transform:translateY(-4px);
+}
+.lux-footer{
+  background:#fff;
+  border-top:1px solid #eee;
+  padding:12px 6%;   /* 👈 HEIGHT CONTROL */
+}
+
+.footer-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+/* Brand */
+.footer-brand h3{
+  font-size:20px;
+  color:#20c997;
+  letter-spacing:2px;
+  margin:0;
+}
+.footer-brand span{
+  font-size:18px;
+  color:#555;
+}
+
+/* Info */
+.footer-info{
+  display:flex;
+  gap:28px;
+  font-size: 19px;
+}
+.footer-info div{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:12px;
+  color:#333;
+}
+.footer-info i{
+  color:#20c997;
+  transition:0.3s;
+}
+.footer-info div:hover i{
+  transform:translateY(-2px);
+}
+
+/* Social */
+.footer-social{
+  display:flex;
+  gap:12px;
+}
+.footer-social i{
+  width:32px;
+  height:32px;
+  display:grid;
+  place-items:center;
+  border:1px solid #20c997;
+  color:#20c997;
+  border-radius:50%;
+  transition:0.35s;
+  cursor:pointer;
+}
+.footer-social i:hover{
+  background:#20c997;
+  color:#fff;
+  transform:rotate(360deg) scale(1.1);
+  box-shadow:0 0 10px rgba(32,201,151,0.5);
+}
+</style>
+</head>
+<body><header>
+  <div class="logo">
+  <img src="Photos/L.png" alt="Elegance Logo">
+  <span>ALITA</span>
+</div>
+ <nav>
+    <a href="home.html"><i class="fas fa-home"></i> Home</a>
+    <a href="home.html#categories"><i class="fas fa-store"></i> Shop</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+    <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+  </nav>
+  <div class="search">
+    <input type="text" id="searchInput" placeholder="Search products..." oninput="showSuggestions()">
+    <button onclick="searchProducts()"><i class="fas fa-search"></i></button>
+    <div id="suggestions" style="
+    position:absolute;
+    top:38px;
+    left:0;
+    background:#fff;
+    border:1px solid #ccc;
+    width:100%;
+    max-height:250px;
+    overflow-y:auto;
+    display:none;
+    z-index:1000;
+  "></div>
+  </div>
+  <div class="icons">
+     <i class="fas fa-user" onclick="goToLogin()"></i>
+    <i class="fas fa-heart" onclick="openFavorites()"></i>
+    <i class="fas fa-shopping-cart"></i>
+  <i class="fas fa-chart-line" onclick="window.location.href='dashboard.html'"></i>
+  </div>
+</header>
+ <section class="about-page"> <!-- HERO --> <div class="about-hero reveal">
+   <div class="about-text"> <h1>About <span>ALITA</span></h1> <p> ALITA is more than jewelry — 
+    it is a reflection of timeless beauty, delicate craftsmanship, and modern luxury designed to shine with you. </p> 
+  </div><div class="about-img luxury-cluster">
+  <div class="ring"></div>
+
+  <div class="circle big">
+    <img src="Photos/About1.jpg">
+  </div>
+
+  <div class="circle small s1">
+    <img src="Photos/About2.jpg">
+  </div>
+
+  <div class="circle small s2">
+    <img src="Photos/About3.jpg">
+  </div>
+
+  <div class="circle small s3">
+    <img src="Photos/About4.jpg">
+  </div>
+
+  <div class="circle small s4">
+    <img src="Photos/About5.jpg">
+  </div>
+</div>
+</div>
+ <!-- STORY --> <div class="about-story reveal"> <div class="story-img">
+         <img src="Photos/About2.jpg" alt="Gold Jewelry White Background"> </div> 
+         <div class="story-text"> <h2>Our Story</h2>
+ <p> Every ALITA piece is thoughtfully crafted to celebrate elegance. From premium materials to refined details, we believe luxury should feel personal, graceful, and everlasting.
+</p> </div> </div> <!-- VALUES --> <div class="about-values"> <div class="value-card reveal"> 
+              <img src="Photos/About3.jpg" alt="Handmade Jewelry Crafting"> <h3>Handcrafted</h3> 
+              <p>Designed with precision, passion, and care.</p> </div> <div class="value-card reveal"> 
+                <img src="Photos/About4.jpg" alt="Minimal Jewelry Photography"> <h3>Minimal Luxury</h3> 
+                <p>Clean designs that speak elegance.</p> </div> <div class="value-card reveal"> 
+                  <img src="Photos/About5.jpg" alt="Elegant Jewelry Box"> <h3>Premium Finish</h3> 
+  <p>Every detail polished to perfection.</p> </div> </div> </section>
+<section class="timeline-tree reveal">
+  <h2>Our Journey</h2>
+  <div class="tree-container">
+
+    <div class="tree-node">
+      <div class="node-icon">
+        <img src="Photos/About1.jpg" alt="Founded ALITA">
+      </div>
+      <div class="node-content">
+        <h3>2018</h3>
+        <p>Founded ALITA with a vision of timeless luxury.</p>
+      </div>
+    </div>
+
+    <div class="tree-node">
+      <div class="node-icon">
+        <img src="Photos/About3.jpg" alt="First Collection Launch">
+      </div>
+      <div class="node-content">
+        <h3>2019</h3>
+        <p>Launched our first exclusive collection.</p>
+      </div>
+    </div>
+
+    <div class="tree-node">
+      <div class="node-icon">
+        <img src="Photos/ring2.jpg" alt="Featured in Fashion Magazine">
+      </div>
+      <div class="node-content">
+        <h3>2021</h3>
+        <p>Featured in top fashion magazines worldwide.</p>
+      </div>
+    </div>
+
+    <div class="tree-node">
+      <div class="node-icon">
+        <img src="Photos/back4.jpg" alt="Awarded Best Craftsmanship">
+      </div>
+      <div class="node-content">
+        <h3>2023</h3>
+        <p>Awarded Best Craftsmanship in Jewelry Design.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+    <div class="favorites-panel" id="favoritesPanel">
+  <div class="fav-header">
+    <h3>My Favorites</h3>
+    <span onclick="closeFavorites()">&times;</span>
+  </div>
+
+  <div class="fav-body" id="favItems">
+    <p>No favorites added yet 💔</p>
+  </div>
+</div>
+<footer class="lux-footer">
+  <div class="footer-row">
+
+    <!-- Brand -->
+    <div class="footer-brand">
+      <h3>ALITA</h3>
+      <span>Timeless Jewelry</span>
+    </div>
+
+    <!-- Info -->
+    <div class="footer-info">
+      <div><i class="fa-solid fa-location-dot"></i><span>Rawalpindi,Pakistan</span></div>
+      <div><i class="fa-solid fa-phone"></i><span>+92 300 670 550</span></div>
+      <div><i class="fa-solid fa-envelope"></i><span>info@alita.com</span></div>
+    </div>
+
+    <!-- Social -->
+    <div class="footer-social">
+      <i class="fa-brands fa-instagram"></i>
+      <i class="fa-brands fa-facebook-f"></i>
+      <i class="fa-brands fa-pinterest-p"></i>
+    </div>
+
+  </div>
+</footer>
+<script>
+  const footer = document.querySelector('.lux-footer');
+  window.addEventListener('scroll',()=>{
+    footer.style.opacity = '1';
+    footer.style.transform = 'translateY(0)';
+  });
+</script>
+<script>
+     // ====== FAVORITES ======
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+  function toggleFav(id, el){
+    el.classList.toggle("favorited");
+    if(el.classList.contains("favorited")){
+      if(!favorites.includes(id)) favorites.push(id);
+    } else {
+      favorites = favorites.filter(f => f !== id);
+    }
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }
+</script>
+<script>
+function openFavorites(){
+  document.getElementById("favoritesPanel").classList.add("active");
+  loadFavorites();
+}
+
+function closeFavorites(){
+  document.getElementById("favoritesPanel").classList.remove("active");
+}
+
+function loadFavorites(){
+  const favItems = document.getElementById("favItems");
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+  if(favorites.length === 0){
+    favItems.innerHTML = "<p>No favorites added yet 💔</p>";
+    return;
+  }
+
+  favItems.innerHTML = "";
+  favorites.forEach(id=>{
+    favItems.innerHTML += `
+      <div class="fav-item">
+        <img src="Photos/${id}.jpg">
+        <div class="fav-info">
+          <div class="name">${id}</div>
+        </div>
+      </div>
+    `;
+  });
+}
+</script>
+
+<script>
+ // ========== LIVE SEARCH ==========
+function showSuggestions() {
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  const suggestionsDiv = document.getElementById('suggestions');
+  suggestionsDiv.innerHTML = "";
+
+  if (!query) {
+    suggestionsDiv.style.display = "none";
+    return;
+  }
+
+  const matches = products.filter(p => p.name.toLowerCase().includes(query));
+
+  if (matches.length === 0) {
+    suggestionsDiv.innerHTML = `<div style="padding:10px; color:#777;">No results found</div>`;
+  } else {
+    matches.forEach(p => {
+      const div = document.createElement('div');
+      div.classList.add('search-suggestion');
+      div.style.padding = "10px";
+      div.style.cursor = "pointer";
+      div.style.borderBottom = "1px solid #eee";
+      div.innerHTML = `<strong>${p.name}</strong> <small style="color:#555;">(${p.category})</small>`;
+      div.onclick = () => selectSuggestion(p.id);
+      suggestionsDiv.appendChild(div);
+    });
+  }
+
+  suggestionsDiv.style.display = "block";
+}
+
+// When user clicks a suggestion
+function selectSuggestion(id) {
+  const product = products.find(p => p.id === id);
+  if (!product) return;
+
+  document.getElementById('searchInput').value = product.name;
+  document.getElementById('suggestions').style.display = "none";
+
+  // scroll to the product's section
+  scrollToSection(product.category);
+
+  // open modal
+  openModal(id);
+}
+
+// Hide suggestions if click outside
+document.addEventListener('click', (e) => {
+  if (!document.querySelector('.search').contains(e.target)) {
+    document.getElementById('suggestions').style.display = "none";
+  }
+});
+</script>
+<script>
+const reveals = document.querySelectorAll('.reveal');
+
+function revealOnLoad(){
+  reveals.forEach(el => {
+    el.classList.add('active');
+  });
+}
+
+window.addEventListener('load', revealOnLoad);
+
+window.addEventListener('scroll', () => {
+  reveals.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    const winHeight = window.innerHeight;
+
+    if(top < winHeight - 100){
+      el.classList.add('active');
+    }
+  });
+});
+</script>
+<script>
+const reveals = document.querySelectorAll('.reveal');
+function revealOnLoad(){reveals.forEach(el => {el.classList.add('active');});}
+window.addEventListener('load', revealOnLoad);
+window.addEventListener('scroll', () => {
+  reveals.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    const winHeight = window.innerHeight;
+    if(top < winHeight - 100){el.classList.add('active');}
+  });
+});
+</script>
+<script>
+function goToLogin(){
+  localStorage.setItem("redirectAfterLogin", window.location.href);
+  window.location.href = "login.html";
+}
+</script>
+</body></html>

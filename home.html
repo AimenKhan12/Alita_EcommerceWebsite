@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoldenAura Jewelry</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+/* ============== GLOBAL ============== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#fff;scroll-behavior:smooth;}
+a{text-decoration:none;color:inherit;}
+
+/* ============== HEADER ============== */
+header{
+  position:sticky;top:0;background:#fff;display:flex;justify-content:space-between;align-items:center;padding:17px 55px;box-shadow:0 4px 12px rgba(0,0,0,0.05);z-index:10;
+}
+/* ===== LOGO CONTAINER ===== */
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+  position:relative;
+  width:fit-content;
+  overflow:hidden;
+}
+
+/* ===== LOGO IMAGE ===== */
+.logo img{
+  width:48px;
+  height:auto;
+  transition:transform 0.4s ease, filter 0.4s ease;
+}
+
+/* ===== LOGO TEXT ===== */
+.logo span{
+  font-size:26px;
+  font-weight:700;
+  letter-spacing:2px;
+  color:#20c997;
+  position:relative;
+  transition:transform 0.4s ease, text-shadow 0.4s ease;
+}
+
+/* ===== HOVER EFFECT ===== */
+.logo:hover img{
+  transform:scale(1.1) rotate(-2deg);
+  filter:drop-shadow(0 6px 10px rgba(32,201,151,0.4));
+}
+
+.logo:hover span{
+  transform:translateY(-2px);
+  text-shadow:0 6px 15px rgba(32,201,151,0.4);
+}
+
+/* ===== SHINE EFFECT (ALWAYS RUNNING) ===== */
+.logo::after{
+  content:'';
+  position:absolute;
+  top:-40%;
+  left:-60%;
+  width:60%;
+  height:180%;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.6),
+    transparent
+  );
+  transform:rotate(20deg);
+  animation:shine 3s infinite;
+}
+
+/* ===== SHINE ANIMATION ===== */
+@keyframes shine{
+  0%{left:-60%;}
+  100%{left:120%;}
+}
+header nav{display:flex;gap:20px;align-items:center;}
+header nav a{font-weight:500;color:#20c997;display:flex;align-items:center;gap:5px;transition:all 0.3s;}
+header nav a:hover{color:#20c997;transform:scale(1.1);}
+header .search{position:relative;}
+header .search input{padding:8px 75px 7px 10px;border-radius:20px;border:1px solid #ccc;outline:none;}
+header .search button{position:absolute;right:5px;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;font-size:18px;color:#20c997;}
+header .search button:hover{color:#20c997;transform: translateY(-50%) scale(1.1);}
+header .icons{display:flex;gap:20px;align-items:center;color:#20c997;}
+header .icons i{font-size:20px;cursor:pointer;transition:all 0.3s;}
+header .icons i:hover{transform:scale(1.2);color:#20c997;}
+
+/* ============== SLIDER ============== */
+.slider{position:relative;width:100%;height:83vh;overflow:hidden;}
+.slider .slide{position:absolute;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center;opacity:0;transform:scale(1.1);transition:opacity 1s ease-in-out, transform 6s ease-out;z-index:0;}
+.slider .slide.active{opacity:1;transform:scale(1);z-index:1;}
+.slider .overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.2);z-index:2;}
+.slider .slider-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:3;color:#fff;}
+.slider .slider-text h2{font-size:40px;font-weight:700;margin-bottom:20px;text-shadow:1px 1px 5px rgba(0,0,0,0.5);}
+.slider .slider-text button{padding:15px 40px;font-size:18px;font-weight:bold;background:linear-gradient(135deg,#20c997,#008080);color:#fff;border:none;border-radius:40px;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 10px 25px rgba(32,201,151,0.35);transition: all 0.4s ease;}
+.slider .slider-text button:hover{background:#006666;transform:translateY(-3px);box-shadow:0 15px 35px rgba(0,0,0,0.35);}
+
+/* ============== CATEGORIES ============== */
+.categories{display:flex;justify-content:space-around;align-items:center;padding:50px 40px;gap:20px;flex-wrap:wrap;}
+.category{display:flex;flex-direction:column;align-items:center;width:150px;cursor:pointer;transition:transform 0.3s;}
+.category:hover{transform:translateY(-5px);}
+.category img{width:100px;height:100px;object-fit:cover;border-radius:50%;margin-bottom:10px;border:3px solid #20c997;padding:5px;}
+.category span{font-weight:600;font-size:18px;color:#222;text-align:center;}
+
+/* ============== PRODUCT SECTION ============== */
+.product-section{padding:50px 40px;}
+.product-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;flex-wrap:wrap;}
+.product-header h2{font-size:32px;color:#222;text-align:center;flex:1;margin-bottom:10px;font-weight: bold;}
+.product-header select{padding:5px 10px;border-radius:5px;border:1px solid #ccc;outline:none;margin-left:10px;}
+
+/* ============== PRODUCT GRID & CARDS ============== */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;}
+.product-card{background:ffff;padding:15px;border-radius:18px;border:3px solid #20c997;box-shadow:0 10px 20px rgba(0,0,0,0.1);text-align:center;position:relative;transition:transform 0.3s, box-shadow 0.3s;}
+.product-card:hover{transform:translateY(-5px);box-shadow:0 15px 30px rgba(0,0,0,0.15);}
+.product-card img{width:100%;height:250px;object-fit:cover;border-radius:10px;margin-bottom:10px;cursor:pointer;}
+.product-card .product-name{font-weight:600;margin-bottom:5px;}
+.product-card .product-price{color:#20c997;font-weight:600;margin-bottom:5px;font-size: 18px;}
+.stars{color:#FFD700;margin-bottom:10px;font-size:21px;}
+.sale-badge{position:absolute;top:10px;right:10px;background:#20c997;color:#fff;font-weight:600;padding:5px 10px;border-radius:5px;font-size:12px;animation:badgeMove 1s linear infinite alternate;}
+@keyframes badgeMove{0%{transform:translateY(0);}100%{transform:translateY(5px);}}
+.fav-btn{position:absolute;bottom:186px;right:10px;font-size:20px;color:#89dad6;cursor:pointer;transition:all 0.3s;}
+.fav-btn.favorited{color:#ff4d4d;}
+.product-card:hover .fav-btn{transform:scale(1.2);}
+.product-card button{padding:10px 20px;font-weight:bold;margin:5px;border-radius:30px;border:none;cursor:pointer;transition: all 0.3s ease;}
+.product-card .view-btn{background:#008080;color:#fff;}
+.product-card .view-btn:hover{background:#006666;}
+.product-card .cart-btn{background:#20c997;color:#fff;}
+.product-card .cart-btn:hover{background:#008080;}
+
+/* ============== MODAL ================= */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: flex-start;  /* keep modal near top */
+  z-index: 100;
+  overflow: auto;
+  padding-top: 40px;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 900px;
+  display: flex;           /* horizontal layout */
+  gap: 20px;               /* space between image & info */
+  position: relative;
+  flex-wrap: nowrap;       /* important! prevents wrapping */
+  align-items: flex-start; /* top-align image & info */
+}
+
+.modal-content img {
+  width: 50%;              /* left column */
+  border-radius: 10px;
+  object-fit: cover;       /* maintain aspect ratio */
+}
+
+.modal-info {
+  width: 50%;              /* right column */
+  display: flex;
+  flex-direction: column;  /* stack details vertically */
+  justify-content: flex-start;
+}
+
+.modal-info h3 {
+  font-size: 28px;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.modal-info .price {
+  font-size: 22px;
+  font-weight: bold;
+  color: #20c997;
+  margin-bottom: 15px;
+}
+
+.modal-info label {
+  font-weight: 500;
+  margin: 5px 0;
+}
+
+.modal-info select {
+  padding: 5px 10px;
+  margin-bottom: 15px;
+  width: 50%;
+}
+
+.modal-info .quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.modal-info .quantity button {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal-info .cart-btn {
+  background: #20c997;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.modal-info .cart-btn:hover {
+  background: #008080;
+}
+.modal-close{
+  position:fixed; /* change from absolute to fixed */
+  top:26px;
+  right:197px;
+  font-size:33px;
+  font-weight:bold;
+  color:#20c997;
+  cursor:pointer;
+  z-index:200; /* above everything */
+  padding:5px 10px;
+  border-radius:50%;
+  transition:all 0.3s;
+}
+.modal-close:hover{
+  transform:scale(1.2);
+  color:#008080;
+}
+header .search button i{pointer-events:none;}
+/* Make modal image interactive */
+#modalImage {
+  cursor: grab;
+  transition: transform 0.2s ease;
+}
+
+/* When dragging */
+#modalImage.dragging {
+  cursor: grabbing;
+}
+/* FAVORITES PANEL */
+#favoritesPanel {
+  position: fixed;
+  top: 0;
+  right: -400px; /* hidden by default */
+  width: 350px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
+  z-index: 200;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+#favoritesPanel.open {
+  right: 0;
+}
+
+.favorites-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.favorites-header h3 {
+  font-size: 22px;
+  color: #20c997;
+}
+
+.close-fav {
+  font-size: 26px;
+  cursor: pointer;
+  color: #20c997;
+}
+
+.favorites-list .fav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.fav-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.fav-item .fav-info {
+  flex: 1;
+}
+
+.fav-item .fav-info .name {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.fav-item .fav-info .price {
+  color: #20c997;
+  font-weight: 600;
+}
+
+.fav-item .remove-fav {
+  cursor: pointer;
+  color: #20c997;
+  font-size: 22px;
+  transition: transform 0.2s;
+}
+
+.fav-item .remove-fav:hover {
+  transform: scale(1.2);
+}
+/* ===== FOOTER ===== */
+.site-footer{
+  background:#fff;
+  padding-top:60px;
+  font-family:'Poppins',sans-serif;
+  color:#555;
+}
+
+/* Top Strip */
+.footer-strip{
+  display:flex;
+  justify-content:center;
+  gap:50px;
+  padding-bottom:35px;
+  border-bottom:1px solid #eee;
+  flex-wrap:wrap;
+}
+
+.strip-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:15px;
+  color:#20c997;
+  transition:all 0.4s ease;
+}
+
+.strip-item i{
+  font-size:18px;
+}
+
+.strip-item:hover{
+  transform:translateY(-4px);
+}
+.lux-footer{
+  background:#fff;
+  border-top:1px solid #eee;
+  padding:12px 6%;   /* 👈 HEIGHT CONTROL */
+}
+
+.footer-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+/* Brand */
+.footer-brand h3{
+  font-size:20px;
+  color:#20c997;
+  letter-spacing:2px;
+  margin:0;
+}
+.footer-brand span{
+  font-size:18px;
+  color:#555;
+}
+
+/* Info */
+.footer-info{
+  display:flex;
+  gap:28px;
+  font-size: 19px;
+}
+.footer-info div{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:12px;
+  color:#333;
+}
+.footer-info i{
+  color:#20c997;
+  transition:0.3s;
+}
+.footer-info div:hover i{
+  transform:translateY(-2px);
+}
+
+/* Social */
+.footer-social{
+  display:flex;
+  gap:12px;
+}
+.footer-social i{
+  width:32px;
+  height:32px;
+  display:grid;
+  place-items:center;
+  border:1px solid #20c997;
+  color:#20c997;
+  border-radius:50%;
+  transition:0.35s;
+  cursor:pointer;
+}
+.footer-social i:hover{
+  background:#20c997;
+  color:#fff;
+  transform:rotate(360deg) scale(1.1);
+  box-shadow:0 0 10px rgba(32,201,151,0.5);
+}
+.cart-icon-wrapper{
+  position: relative;
+}
+
+.cart-badge{
+  position:absolute;
+  top:-6px;
+  right:-10px;
+  background:#20c997;
+  color:#fff;
+  font-size:11px;
+  font-weight:600;
+  padding:2px 6px;
+  border-radius:50%;
+  display:none;
+  box-shadow:0 0 8px rgba(32,201,151,0.6);
+  animation: pop 0.3s ease;
+}
+
+@keyframes pop{
+  0%{transform:scale(0);}
+  100%{transform:scale(1);}
+}
+.cart-popup{
+  position:fixed;
+  top:-120px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:99999;
+  transition:all 0.5s ease;
+}
+
+.cart-popup.show{
+  top:20px;
+}
+
+.popup-content{
+  background:#fff;
+  padding:15px 25px;
+  border-radius:14px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.15);
+  display:flex;
+  align-items:center;
+  gap:12px;
+  animation:slidePop 0.4s ease;
+}
+
+.popup-content i{
+  color:#20c997;
+  font-size:22px;
+}
+
+.popup-content p{
+  font-size:14px;
+  color:#333;
+  margin:0;
+  white-space:nowrap;
+}
+
+.popup-content button{
+  margin-left:10px;
+  background:#20c997;
+  color:#fff;
+  border:none;
+  padding:6px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:13px;
+  transition:all 0.3s ease;
+}
+
+.popup-content button:hover{
+  background:#169e79;
+  transform:scale(1.05);
+}
+
+@keyframes slidePop{
+  from{transform:scale(0.9);}
+  to{transform:scale(1);}
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+  <img src="Photos/L.png" alt="Elegance Logo">
+  <span>ALITA</span>
+</div>
+ <nav>
+    <a href="home.html"><i class="fas fa-home"></i> Home</a>
+    <a href="#categories"><i class="fas fa-store"></i> Shop</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+    <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+  </nav>
+  <div class="search">
+    <input type="text" id="searchInput" placeholder="Search products..." oninput="showSuggestions()">
+    <button onclick="searchProducts()"><i class="fas fa-search"></i></button>
+    <div id="suggestions" style="
+    position:absolute;
+    top:38px;
+    left:0;
+    background:#fff;
+    border:1px solid #ccc;
+    width:100%;
+    max-height:250px;
+    overflow-y:auto;
+    display:none;
+    z-index:1000;
+  "></div>
+  </div>
+  <div class="icons">
+   <i class="fas fa-user" onclick="goToLogin()"></i>
+    <i class="fas fa-heart" onclick="openFavorites()"></i>
+    <div class="cart-icon-wrapper">
+  <i class="fas fa-shopping-cart" id="cartIcon" onclick="window.location.href='cart.html'"></i>
+  <span class="cart-badge" id="cartCount">0</span>
+</div>
+
+  <i class="fas fa-chart-line" onclick="window.location.href='dashboard.html'"></i>
+
+
+  </div>
+</header>
+
+<!-- Slider -->
+<div class="slider">
+  <div class="slide active" style="background-image:url('Photos/sale1.jpg')"></div>
+  <div class="slide" style="background-image:url('Photos/sale2.jpg')"></div>
+  <div class="slide" style="background-image:url('Photos/sale3.jpg')"></div>
+  <div class="slide" style="background-image:url('Photos/sale4.jpg')"></div>
+  <div class="overlay"></div>
+  <div class="slider-text">
+    <h2>Big Sale on selected items  !   Up to 50% Off</h2>
+    <button onclick="scrollToCategories()">Shop Now</button>
+  </div>
+</div>
+
+<!-- Categories -->
+<section class="categories" id="categories">
+  <div class="category" onclick="scrollToSection('Rings')"><img src="Photos/ring1.jpg"><span>Rings</span></div>
+  <div class="category" onclick="scrollToSection('Necklaces')"><img src="Photos/n1.jpg"><span>Necklaces</span></div>
+  <div class="category" onclick="scrollToSection('Bracelets')"><img src="Photos/b1.jpg"><span>Bracelets</span></div>
+  <div class="category" onclick="scrollToSection('Earrings')"><img src="Photos/e1.jpg"><span>Earrings</span></div>
+</section>
+  <!-- Product Sections -->
+  <section class="product-section" id="Rings">
+    <div class="product-header">
+      <h2>Rings</h2>
+      <select>
+        <option>Sort by: Popular</option>
+        <option>Price Low → High</option>
+        <option>Price High → Low</option>
+        <option>New Arrivals</option>
+      </select>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+     
+        <img src="Photos/ring1.jpg" alt="">
+        <div class="stars">★★★★★</div>
+        <button class="view-btn" onclick="openModal('ring1')">View Details</button>
+        <button class="cart-btn" data-id="ring1">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="Photos/ring2.jpg" alt="">
+        <div class="stars">★★★★☆</div>
+        <button class="view-btn" onclick="openModal('ring2')">View Details</button>
+        <button class="cart-btn" data-id="ring2">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="Photos/ring3.jpg" alt="">
+        <div class="stars">★★★☆☆</div>
+        <button class="view-btn" onclick="openModal('ring3')">View Details</button>
+        <button class="cart-btn" data-id="ring3">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="Photos/ring4.jpg" alt="">
+        <div class="stars">★★★★★</div>
+        <button class="view-btn" onclick="openModal('ring4')">View Details</button>
+        <button class="cart-btn" data-id="ring4">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Similarly, you can copy this product-section for Necklaces, Bracelets, Earrings -->
+  <!-- Necklaces -->
+  <section class="product-section" id="Necklaces">
+    <div class="product-header">
+      <h2>Necklaces</h2>
+      <select>
+        <option>Sort by: Popular</option>
+        <option>Price Low → High</option>
+        <option>Price High → Low</option>
+        <option>New Arrivals</option>
+      </select>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="Photos/n1.jpg" alt="">
+        <div class="stars">★★★★☆</div>
+        <button class="view-btn" onclick="openModal('n1')">View Details</button>
+        <button class="cart-btn" data-id="n1">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="Photos/n2.jpg" alt="">
+        <div class="stars">★★★★★</div>
+        <button class="view-btn" onclick="openModal('n2')">View Details</button>
+        <button class="cart-btn" data-id="n2">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="Photos/n3.jpg" alt="">
+        <div class="stars">★★★☆☆</div>
+        <button class="view-btn" onclick="openModal('n3')">View Details</button>
+        <button class="cart-btn" data-id="n3">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="Photos/n4.jpg" alt="">
+        <div class="stars">★★★★☆</div>
+        <button class="view-btn" onclick="openModal('n4')">View Details</button>
+        <button class="cart-btn" data-id="n4">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bracelets -->
+  <section class="product-section" id="Bracelets">
+    <div class="product-header">
+      <h2>Bracelets</h2>
+      <select>
+        <option>Sort by: Popular</option>
+        <option>Price Low → High</option>
+        <option>Price High → Low</option>
+        <option>New Arrivals</option>
+      </select>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="Photos/b1.jpg" alt="">
+        <div class="stars">★★★★★</div>
+        <button class="view-btn" onclick="openModal('b1')">View Details</button>
+        <button class="cart-btn" data-id="b1">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="Photos/b2.jpg" alt="">
+        <div class="stars">★★★★☆</div>
+        <button class="view-btn" onclick="openModal('b2')">View Details</button>
+        <button class="cart-btn" data-id="b2">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="Photos/b3.jpg" alt="">
+        <div class="stars">★★★☆☆</div>
+        <button class="view-btn" onclick="openModal('b3')">View Details</button>
+        <button class="cart-btn" data-id="b3">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="Photos/b4.jpg" alt="">
+        <div class="stars">★★★★☆</div>
+        <button class="view-btn" onclick="openModal('b4')">View Details</button>
+        <button class="cart-btn" data-id="b4">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Earrings -->
+  <section class="product-section" id="Earrings">
+    <div class="product-header">
+      <h2>Earrings</h2>
+      <select>
+        <option>Sort by: Popular</option>
+        <option>Price Low → High</option>
+        <option>Price High → Low</option>
+        <option>New Arrivals</option>
+      </select>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="Photos/e1.jpg" alt="">
+        <div class="stars">★★★★☆</div>
+        <button class="view-btn" onclick="openModal('e1')">View Details</button>
+        <button class="cart-btn" data-id="e1">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="Photos/e2.jpg" alt="">
+        <div class="stars">★★★★★</div>
+        <button class="view-btn" onclick="openModal('e2')">View Details</button>
+        <button class="cart-btn" data-id="e2">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="Photos/e3.jpg" alt="">
+        <div class="stars">★★★☆☆</div>
+        <button class="view-btn" onclick="openModal('e3')">View Details</button>
+        <button class="cart-btn" data-id="e3">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="Photos/e4.jpg" alt="">
+        <div class="stars">★★★★☆</div>
+        <button class="view-btn" onclick="openModal('e4')">View Details</button>
+        <button class="cart-btn" data-id="e4">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Modal -->
+  <div class="modal" id="productModal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <img id="modalImage" src="" alt="">
+      <div class="modal-info">
+        <h3 id="modalName">Product Name</h3>
+        <div class="price" id="modalPrice">$0.00</div>
+        <label>Color:</label>
+        <select id="modalColor">
+          <option>Gold</option>
+          <option>Silver</option>
+          <option>Rose</option>
+        </select>
+        <div class="quantity">
+          <label>Quantity:</label>
+          <button onclick="changeQty(-1)">-</button>
+          <input type="number" id="qtyInput" value="1" min="1" style="width:40px;text-align:center;">
+          <button onclick="changeQty(1)">+</button>
+        </div>
+       <button class="cart-btn modal-cart-btn" style="margin-top:15px;">
+  Add to Cart
+</button>
+      </div>
+    </div>
+  </div>
+  <!-- FAVORITES PANEL -->
+<div id="favoritesPanel">
+  <div class="favorites-header">
+    <h3>My Favorites</h3>
+    <span class="close-fav" onclick="closeFavorites()">&times;</span>
+  </div>
+  <div class="favorites-list" id="favoritesList">
+    <!-- Favorite items will be injected here -->
+  </div>
+</div>
+<!-- Cart Notification Popup -->
+<div class="cart-popup" id="cartPopup">
+  <div class="popup-content">
+    <i class="fas fa-check-circle"></i>
+    <p id="popupText">Item added to cart</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+<footer class="lux-footer">
+  <div class="footer-row">
+
+    <!-- Brand -->
+    <div class="footer-brand">
+      <h3>ALITA</h3>
+      <span>Timeless Jewelry</span>
+    </div>
+
+    <!-- Info -->
+    <div class="footer-info">
+      <div><i class="fa-solid fa-location-dot"></i><span>Rawalpindi,Pakistan</span></div>
+      <div><i class="fa-solid fa-phone"></i><span>+92 300 670 550</span></div>
+      <div><i class="fa-solid fa-envelope"></i><span>info@alita.com</span></div>
+    </div>
+
+    <!-- Social -->
+    <div class="footer-social">
+      <i class="fa-brands fa-instagram"></i>
+      <i class="fa-brands fa-facebook-f"></i>
+      <i class="fa-brands fa-pinterest-p"></i>
+    </div>
+
+  </div>
+</footer>
+<script>
+  const footer = document.querySelector('.lux-footer');
+  window.addEventListener('scroll',()=>{
+    footer.style.opacity = '1';
+    footer.style.transform = 'translateY(0)';
+  });
+</script>
+  <!-- ========== Scripts ========== -->
+ <script>
+  // ====== PRODUCTS ======
+  const products = [
+    {id:"ring1", name:"Gold Ring", price:27000, stars:5, img:"Photos/ring1.jpg", category:"Rings", sale:"50%"},
+    {id:"ring2", name:"Silver double Ring", price:19000, stars:4, img:"Photos/ring2.jpg", category:"Rings"},
+    {id:"ring3", name:"zig zag Ring", price:28000, stars:3, img:"Photos/ring3.jpg", category:"Rings", sale:"30%"},
+    {id:"ring4", name:"Stud Ring", price:15000, stars:5, img:"Photos/ring4.jpg", category:"Rings"},
+
+    {id:"n1", name:"Hock Necklace", price:18000, stars:4, img:"Photos/n1.jpg", category:"Necklaces", sale:"25%"},
+    {id:"n2", name:"double chain Necklace", price:25000, stars:5, img:"Photos/n2.jpg", category:"Necklaces"},
+    {id:"n3", name:"Gold  Necklace", price:98000, stars:3, img:"Photos/n3.jpg", category:"Necklaces", sale:"50%"},
+    {id:"n4", name:"Silver Necklace", price:28000, stars:4, img:"Photos/n4.jpg", category:"Necklaces"},
+
+    {id:"b1", name:"Gold Bracelet", price:8000, stars:5, img:"Photos/b1.jpg", category:"Bracelets", sale:"20%"},
+    {id:"b2", name:"Silver Bracelet", price:7000, stars:4, img:"Photos/b2.jpg", category:"Bracelets"},
+    {id:"b3", name:"Gold platted Bracelet", price:12000, stars:3, img:"Photos/b3.jpg", category:"Bracelets", sale:"40%"},
+    {id:"b4", name:"Watch Bracelet", price:1000, stars:4, img:"Photos/b4.jpg", category:"Bracelets", sale:"50%"},
+
+    {id:"e1", name:"Gold Earrings", price:6000, stars:4, img:"Photos/e1.jpg", category:"Earrings",sale:"10%"},
+    {id:"e2", name:"Flower Earrings", price:5000, stars:2, img:"Photos/e2.jpg", category:"Earrings",sale:"50%"},
+    {id:"e3", name:"Butterfly Earrings", price:8000, stars:3, img:"Photos/e3.jpg", category:"Earrings"},
+    {id:"e4", name:"Diamond Earrings", price:97000, stars:4, img:"Photos/e4.jpg", category:"Earrings"}
+  ];
+
+  // ====== FAVORITES ======
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+  function toggleFav(id, el){
+    el.classList.toggle("favorited");
+    if(el.classList.contains("favorited")){
+      if(!favorites.includes(id)) favorites.push(id);
+    } else {
+      favorites = favorites.filter(f => f !== id);
+    }
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }
+
+  // ====== RENDER PRODUCTS BY CATEGORY ======
+  function renderProductsByCategory(){
+    const sections = document.querySelectorAll(".product-section");
+    sections.forEach(section => {
+      const category = section.id;
+      const grid = section.querySelector(".product-grid");
+      grid.innerHTML = "";
+      const filtered = products.filter(p => p.category === category);
+
+      filtered.forEach(p => {
+        const isFav = favorites.includes(p.id);
+        grid.innerHTML += `
+          <div class="product-card" data-id="${p.id}">
+            <span class="fav-btn ${isFav ? "favorited" : ""}" onclick="toggleFav('${p.id}', this)">❤</span>
+            ${p.sale ? `<div class="sale-badge">${p.sale}</div>` : ""}
+            <img src="${p.img}" alt="${p.name}">
+            <div class="product-name">${p.name}</div>
+            <div class="product-price">Rs-${p.price}</div>
+            <div class="stars">${"★".repeat(p.stars)}${"☆".repeat(5-p.stars)}</div>
+            <button class="view-btn" onclick="openModal('${p.id}')">View Details</button>
+          <button class="cart-btn" data-id="${p.id}">Add to Cart</button>
+          </div>
+        `;
+      });
+    });
+  }
+
+  renderProductsByCategory();
+</script>
+<script>
+const modal = document.getElementById('productModal');
+const modalImage = document.getElementById('modalImage');
+const modalName = document.getElementById('modalName');
+const modalPrice = document.getElementById('modalPrice');
+const qtyInput = document.getElementById('qtyInput');
+
+// Close modal if clicking outside content
+window.onclick = function(e){
+  if(e.target === modal){
+    closeModal();
+  }
+}
+</script>
+<script>
+// ===== SLIDER =====
+const slides=document.querySelectorAll('.slider .slide');
+let currentSlide=0;
+setInterval(()=>{slides[currentSlide].classList.remove('active');currentSlide=(currentSlide+1)%slides.length;slides[currentSlide].classList.add('active');},4000);
+
+function scrollToCategories(){document.getElementById('categories').scrollIntoView({behavior:'smooth'});}
+function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+</script>
+<script>
+// ===== SORT PRODUCTS =====
+document.querySelectorAll('.product-section').forEach(section => {
+  const select = section.querySelector('select');
+  const grid = section.querySelector('.product-grid');
+
+  select.addEventListener('change', () => {
+    const category = section.id;
+    let sortedProducts = products.filter(p => p.category === category);
+
+    switch(select.value){
+      case 'Price Low → High':
+        sortedProducts.sort((a,b) => a.price - b.price);
+        break;
+      case 'Price High → Low':
+        sortedProducts.sort((a,b) => b.price - a.price);
+        break;
+      case 'New Arrivals':
+        sortedProducts.sort((a,b) => b.id.localeCompare(a.id)); // assuming higher id = newer
+        break;
+      default: // Popular or default
+        sortedProducts.sort((a,b) => a.stars - b.stars); // example: sort by stars
+        break;
+    }
+
+    // Re-render the products in this section
+    grid.innerHTML = '';
+    sortedProducts.forEach(p => {
+      const isFav = favorites.includes(p.id);
+      grid.innerHTML += `
+        <div class="product-card" data-id="${p.id}">
+          <span class="fav-btn ${isFav ? "favorited" : ""}" onclick="toggleFav('${p.id}', this)">❤</span>
+          ${p.sale ? `<div class="sale-badge">${p.sale}</div>` : ""}
+          <img src="${p.img}" alt="${p.name}">
+          <div class="product-name">${p.name}</div>
+          <div class="product-price">$${p.price}</div>
+          <div class="stars">${"★".repeat(p.stars)}${"☆".repeat(5-p.stars)}</div>
+          <button class="view-btn" onclick="openModal('${p.id}')">View Details</button>
+<button class="cart-btn" data-id="${p.id}">Add to Cart</button>
+        </div>
+      `;
+    });
+  });
+});
+</script>
+<script>
+  // Zoom & Rotate functionality for modal image
+let scale = 1;       // zoom level
+let rotate = 0;      // rotation degree
+let isDragging = false;
+let startX, startY;
+
+modalImage.addEventListener('wheel', e => {
+  e.preventDefault();
+  if (e.deltaY < 0) {
+    scale += 0.1; // zoom in
+  } else {
+    scale -= 0.1; // zoom out
+  }
+  if(scale < 0.5) scale = 0.5; // min zoom
+  if(scale > 3) scale = 3;     // max zoom
+  modalImage.style.transform = `scale(${scale}) rotate(${rotate}deg)`;
+});
+
+modalImage.addEventListener('mousedown', e => {
+  isDragging = true;
+  startX = e.clientX;
+  startY = e.clientY;
+  modalImage.classList.add('dragging');
+});
+
+window.addEventListener('mouseup', () => {
+  isDragging = false;
+  modalImage.classList.remove('dragging');
+});
+
+window.addEventListener('mousemove', e => {
+  if(!isDragging) return;
+  let deltaX = e.clientX - startX;
+  rotate += deltaX / 2; // adjust rotation speed
+  modalImage.style.transform = `scale(${scale}) rotate(${rotate}deg)`;
+  startX = e.clientX;
+});
+</script>
+<script>
+  // ===== FAVORITES PANEL =====
+function openFavorites() {
+  renderFavorites();
+  document.getElementById('favoritesPanel').classList.add('open');
+}
+
+function closeFavorites() {
+  document.getElementById('favoritesPanel').classList.remove('open');
+}
+
+function renderFavorites() {
+  const list = document.getElementById('favoritesList');
+  list.innerHTML = '';
+
+  if(favorites.length === 0){
+    list.innerHTML = '<p>No favorites yet!</p>';
+    return;
+  }
+
+  favorites.forEach(id => {
+    const product = products.find(p => p.id === id);
+    if(!product) return;
+
+    const item = document.createElement('div');
+    item.classList.add('fav-item');
+
+    item.innerHTML = `
+      <img src="${product.img}" alt="${product.name}">
+      <div class="fav-info">
+        <div class="name">${product.name}</div>
+        <div class="price">Rs-${product.price}</div>
+      </div>
+      <span class="remove-fav" onclick="removeFavorite('${product.id}')">&times;</span>
+    `;
+
+    list.appendChild(item);
+  });
+}
+
+function removeFavorite(id){
+  favorites = favorites.filter(f => f !== id);
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+  renderFavorites();
+
+  // Update heart icon on product card if present
+  const btn = document.querySelector(`.product-card[data-id="${id}"] .fav-btn`);
+  if(btn) btn.classList.remove('favorited');
+}
+</script>
+<script>
+ // ========== LIVE SEARCH ==========
+function showSuggestions() {
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  const suggestionsDiv = document.getElementById('suggestions');
+  suggestionsDiv.innerHTML = "";
+
+  if (!query) {
+    suggestionsDiv.style.display = "none";
+    return;
+  }
+
+  const matches = products.filter(p => p.name.toLowerCase().includes(query));
+
+  if (matches.length === 0) {
+    suggestionsDiv.innerHTML = `<div style="padding:10px; color:#777;">No results found</div>`;
+  } else {
+    matches.forEach(p => {
+      const div = document.createElement('div');
+      div.classList.add('search-suggestion');
+      div.style.padding = "10px";
+      div.style.cursor = "pointer";
+      div.style.borderBottom = "1px solid #eee";
+      div.innerHTML = `<strong>${p.name}</strong> <small style="color:#555;">(${p.category})</small>`;
+      div.onclick = () => selectSuggestion(p.id);
+      suggestionsDiv.appendChild(div);
+    });
+  }
+
+  suggestionsDiv.style.display = "block";
+}
+
+// When user clicks a suggestion
+function selectSuggestion(id) {
+  const product = products.find(p => p.id === id);
+  if (!product) return;
+
+  document.getElementById('searchInput').value = product.name;
+  document.getElementById('suggestions').style.display = "none";
+  scrollToSection(product.category);
+  openModal(id);
+}
+document.addEventListener('click', (e) => {
+  if (!document.querySelector('.search').contains(e.target)) {
+    document.getElementById('suggestions').style.display = "none";
+  }
+});
+</script>
+<script>
+let cartCount = parseInt(localStorage.getItem("cartCount")) || 0;
+
+const cartBadge = document.getElementById("cartCount");
+const popup = document.getElementById("cartPopup");
+const popupText = document.getElementById("popupText");
+function updateCartBadge(){
+  if(cartCount > 0){
+    cartBadge.style.display = "inline-block";
+    cartBadge.textContent = cartCount;
+  } else {
+    cartBadge.style.display = "none";
+  }
+  localStorage.setItem("cartCount", cartCount);
+}
+function addToCart(product, color, qty){
+  qty = parseInt(qty);
+
+  // 1️⃣ existing cart lo
+  let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+  // 2️⃣ same product + color already hai?
+  const existingItem = cart.find(
+    item => item.id === product.id && item.color === color
+  );
+
+  if(existingItem){
+    existingItem.qty += qty;
+  } else {
+    cart.push({
+      id: product.id,
+      name: product.name,
+      img: product.img,
+      price: product.price,
+      color: color,
+      qty: qty
+    });
+  }
+
+  // 3️⃣ cart save karo
+  localStorage.setItem("cartItems", JSON.stringify(cart));
+
+  // 4️⃣ badge update
+  cartCount += qty;
+  updateCartBadge();
+
+  // 5️⃣ popup
+  popupText.textContent =
+    `${product.name} (${color}) ×${qty} added to cart`;
+
+  popup.classList.add("show");
+  setTimeout(() => popup.classList.remove("show"), 3000);
+}
+
+function closePopup(){
+  popup.classList.remove("show");
+}
+function openModal(id){
+  const product = products.find(p => p.id === id);
+  if(!product) return;
+
+  document.getElementById("modalImage").src = product.img;
+  document.getElementById("modalName").textContent = product.name;
+  document.getElementById("modalPrice").textContent = "Rs " + product.price;
+
+  document.getElementById("qtyInput").value = 1;
+
+  const modalBtn = document.querySelector(".modal-cart-btn");
+  modalBtn.dataset.id = product.id;
+
+}
+function openModal(id){
+  const product = products.find(p => p.id === id);
+  if(!product) return;
+
+  modalImage.src = product.img;
+  modalName.textContent = product.name;
+  modalPrice.textContent = "Rs " + product.price;
+  qtyInput.value = 1;
+
+  document.querySelector(".modal-cart-btn").dataset.id = product.id;
+
+  document.getElementById("productModal").style.display = "flex";
+}
+
+function closeModal(){
+  document.getElementById("productModal").style.display = "none";
+}
+function changeQty(value){
+  const qtyInput = document.getElementById("qtyInput");
+  let qty = parseInt(qtyInput.value);
+  qty = qty + value;
+  if(qty < 1) qty = 1;
+  qtyInput.value = qty;
+}
+document.addEventListener("click", function(e){
+  if(e.target.classList.contains("cart-btn")){
+    const btn = e.target;
+    const productId = btn.dataset.id;
+    const product = products.find(p => p.id === productId);
+    if(!product) return;
+
+    let color = "Gold";
+    let qty = 1;
+
+    /* If modal add-to-cart */
+    if(btn.classList.contains("modal-cart-btn")){
+      color = document.getElementById("modalColor").value;
+      qty = document.getElementById("qtyInput").value;
+    }
+
+    addToCart(product, color, qty);
+  }
+});
+updateCartBadge();
+</script>
+<script>
+function goToLogin(){
+  localStorage.setItem("redirectAfterLogin", window.location.href);
+  window.location.href = "login.html";
+}
+</script>
+
+</body></html>

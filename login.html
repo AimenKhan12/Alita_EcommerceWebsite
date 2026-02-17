@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login | Create Account</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+/* ===== Background ===== */
+body{
+  min-height:100vh;
+  background:linear-gradient(135deg,#e6fff6,#f8fffc);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ===== Card ===== */
+.auth-card{
+  width:420px;
+  background:#fff;
+  border-radius:25px;
+  padding:35px 30px 40px;
+  box-shadow:0 30px 70px rgba(32,201,151,.25);
+  position:relative;
+  animation:scaleIn .8s ease;
+}
+
+@keyframes scaleIn{
+  from{transform:scale(.8);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+/* ===== Close Button ===== */
+.close-btn{
+  position:absolute;
+  top:18px;
+  right:18px;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#e9fff8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:.3s;
+}
+.close-btn:hover{
+  background:#20c997;
+  color:#fff;
+  transform:rotate(90deg);
+}
+
+
+.auth-card h2:hover{
+  letter-spacing:1px;
+}
+
+
+
+/* ===== Inputs ===== */
+.input-box{
+  margin-bottom:18px;
+  position:relative;
+}
+.input-box i{
+  position:absolute;
+  top:50%;
+  left:14px;
+  transform:translateY(-50%);
+  color:#20c997;
+}
+.input-box input{
+  width:100%;
+  padding:13px 14px 13px 42px;
+  border-radius:14px;
+  border:1.5px solid #e0e0e0;
+  outline:none;
+  transition:.3s;
+}
+.input-box input:hover{
+  border-color:#20c997;
+}
+.input-box input:focus{
+  border-color:#20c997;
+  box-shadow:0 0 0 3px rgba(32,201,151,.15);
+}
+
+/* ===== Error ===== */
+.error{
+  color:#e74c3c;
+  font-size:14px;
+  margin-bottom:12px;
+  text-align:center;
+}
+
+/* ===== Button ===== */
+.auth-btn{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:16px;
+  background:#20c997;
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+  transition:.35s;
+}
+.auth-btn:hover{
+  background:#17a589;
+  transform:translateY(-3px);
+  box-shadow:0 15px 35px rgba(32,201,151,.35);
+}
+
+/* ===== Switch ===== */
+.switch{
+  margin-top:18px;
+  text-align:center;
+  font-size:14px;
+}
+.switch span{
+  color:#20c997;
+  cursor:pointer;
+  font-weight:600;
+}
+.switch span:hover{
+  text-decoration:underline;
+}
+/* ===== Brand Header ===== */
+.brand{
+  text-align:center;
+  margin-bottom:22px;
+}
+
+.brand h1{
+  font-size:36px;
+  letter-spacing:4px;
+  color:#20c997;
+  font-weight:700;
+}
+
+.brand p{
+  font-size:13px;
+  color:#666;
+  margin-top:6px;
+  font-style:italic;
+}
+/* ===== Auth Header (Clean Luxury) ===== */
+.auth-header{
+  text-align:center;
+  margin-bottom:26px;
+}
+
+.logo-text{
+  display:block;
+  font-size:26px;
+  letter-spacing:3px;
+  color:#20c997;
+  font-weight:600;
+}
+
+.tagline{
+  font-size:11px;
+  letter-spacing:2px;
+  color:#888;
+  text-transform:uppercase;
+  margin-top:-4px;
+  margin-bottom:18px;
+}
+/* ===== Brand Logo & Quote ===== */
+.brand-logo{
+  font-family: 'Cinzel', serif; /* luxury serif font */
+  font-size:36px;
+  color:#20c997;
+  text-align:center;
+  transition:0.3s ease;
+  cursor:default;
+}
+
+.brand-logo:hover{
+  color:#17a589;
+  letter-spacing:5px;
+  transform:scale(1.05);
+}
+
+.brand-quote{
+  font-family: 'Playfair Display', serif;
+  font-size:13px;
+  color:#666;
+  text-align:center;
+  margin-top:4px;
+  margin-bottom:18px;
+  font-style:italic;
+}
+
+/* ===== Auth Section ===== */
+.auth-header h2{
+  font-size:24px;
+  text-align:center;
+  color:#222;
+  margin-bottom:6px;
+}
+
+.auth-header p{
+  font-size:14px;
+  text-align:center;
+  color:#777;
+  margin-bottom:20px;
+}
+
+/* ===== LOGIN / CREATE ACCOUNT Button Style ===== */
+.auth-btn{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:18px;
+  background:#20c997;
+  color:#fff;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.35s ease;
+  box-shadow:0 8px 20px rgba(32,201,151,.2);
+}
+
+.auth-btn:hover{
+  background:#17a589;
+  transform:translateY(-3px) scale(1.02);
+  box-shadow:0 15px 35px rgba(32,201,151,.35);
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="auth-card">
+
+  <!-- Close -->
+  <div class="close-btn" onclick="goBack()">
+    <i class="fas fa-xmark"></i>
+  </div>
+
+<div class="auth-header">
+  <h1 class="brand-logo">ALITA</h1>
+  <p class="brand-quote">Timeless elegance, crafted to shine with you</p>
+
+  <h2 id="title">Login</h2>
+  <p id="subtitle">Access your account</p>
+</div>
+
+
+  <div class="error" id="error"></div>
+
+  <div class="input-box">
+    <i class="fas fa-envelope"></i>
+    <input type="email" id="email" placeholder="Email">
+  </div>
+
+  <div class="input-box">
+    <i class="fas fa-lock"></i>
+    <input type="password" id="password" placeholder="Password">
+  </div>
+
+  <div class="input-box" id="nameBox" style="display:none;">
+    <i class="fas fa-user"></i>
+    <input type="text" id="name" placeholder="Full Name">
+  </div>
+
+  <button class="auth-btn" onclick="submitForm()">Continue</button>
+
+  <div class="switch">
+    <span onclick="toggleForm()">Create Account</span>
+  </div>
+
+</div>
+<script>
+let isLogin = true;
+
+function toggleForm(){
+  isLogin = !isLogin;
+
+  document.getElementById("title").innerText = isLogin ? "Login" : "Create Account";
+  document.getElementById("subtitle").innerText =
+    isLogin ? "Welcome back! Please login" : "Create your new account";
+
+  document.getElementById("nameBox").style.display = isLogin ? "none" : "block";
+  document.querySelector(".switch span").innerText =
+    isLogin ? "Create Account" : "Back to Login";
+
+  document.getElementById("error").innerText = "";
+}
+
+function submitForm(){
+  const email = document.getElementById("email").value.trim();
+  const pass  = document.getElementById("password").value.trim();
+  const name  = document.getElementById("name").value.trim();
+  const err   = document.getElementById("error");
+
+  err.style.color = "#e74c3c";
+
+  if(!email){
+    err.innerText = "Email is missing";
+    return;
+  }
+  if(!pass){
+    err.innerText = "Password is missing";
+    return;
+  }
+  if(!isLogin && !name){
+    err.innerText = "Full name is missing";
+    return;
+  }
+
+  // SUCCESS
+  err.style.color = "#20c997";
+  err.innerText = isLogin ? "Login successful 🎉" : "Account created successfully 🎉";
+
+  loginSuccess(); // ✅ CALL
+}
+
+function loginSuccess(){
+  setTimeout(()=>{
+    const redirectPage = localStorage.getItem("redirectAfterLogin");
+    if(redirectPage){
+      window.location.href = redirectPage;
+    }else{
+      window.location.href = "index.html";
+    }
+  },1200);
+}
+
+function goBack(){
+  window.history.back();
+}
+</script>
+
+
+</body>
+</html>
